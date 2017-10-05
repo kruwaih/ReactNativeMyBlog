@@ -1,5 +1,5 @@
 import {observer} from 'mobx-react';
-import store from '../Store';
+import MyStore from '../Store';
 import {AsyncStorage} from 'react-native';
 
 const auth = observer(new class auth {
@@ -10,18 +10,18 @@ const auth = observer(new class auth {
     this.getToken(username,password)
     }
 
-  logout(){
-    AsyncStorage.removeItem('token')
-    AsyncStorage.removeItem('username')
-    store.authenticated = false
-    store.token = ""
-    store.username = ""
-  }
+  // logout(){
+  //   AsyncStorage.removeItem('token')
+  //   AsyncStorage.removeItem('username')
+  //   MyStore.authenticated = false
+  //   store.token = ""
+  //   store.username = ""
+  // }
   firstLoad() {
     if (this.loggedIn) {
-      AsyncStorage.getItem('token').then((x) => store.token = x)
-      store.authenticated = true
-      AsyncStorage.getItem('username').then((x) => store.username = x)
+      AsyncStorage.getItem('token').then((x) => MyStore.token = x)
+      MyStore.authenticated = true
+      AsyncStorage.getItem('username').then((x) => MyStore.username = x)
     }
   }
   loggedIn(){
@@ -35,24 +35,24 @@ const auth = observer(new class auth {
     })
   }
 
-  signup(username,password){
-    fetch('http://139.59.119.40/api/register/',{
-     method: 'POST',
-     headers: {
-       'Accept':'application/json',
-       'Content-Type':'application/json',
-
-     },
-     body: JSON.stringify({
-       "username": username,
-       "password": password
-     })}
-   ).then(function(res){
-     console.log(username,password)
-     this.getToken(username, password)
-   }.bind(this)).catch((error) => console.log(error)).done();
-
-}
+//   signup(username,password){
+//     fetch('http://139.59.119.40/api/register/',{
+//      method: 'POST',
+//      headers: {
+//        'Accept':'application/json',
+//        'Content-Type':'application/json',
+//
+//      },
+//      body: JSON.stringify({
+//        "username": username,
+//        "password": password
+//      })}
+//    ).then(function(res){
+//      console.log(username,password)
+//      this.getToken(username, password)
+//    }.bind(this)).catch((error) => console.log(error)).done();
+//
+// }
   getToken(username,password){
      fetch('http://139.59.119.40/api/login/',{
       method: 'POST',
@@ -66,9 +66,9 @@ const auth = observer(new class auth {
       })}
     ).then((res) => res.json())
     .then((res) => {
-      store.authenticated = true
-    store.token = res.token
-    store.username = res.username
+      MyStore.authenticated = true
+    MyStore.token = res.token
+    MyStore.username = res.username
     AsyncStorage.setItem('token', res.token)
     AsyncStorage.setItem('username', res.username)
     console.log(res.username)

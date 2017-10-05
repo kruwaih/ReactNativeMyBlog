@@ -19,8 +19,10 @@ export default observer (class MyContent extends Component {
         <Content>
 
           <Route path="/x" component={MyLogin} />
-          <Route path="/y" component={MyPost} />
-            <Route path="/z" component={MyList}/>
+          <Route path="/y" render={
+          ()=> <MyPost store ={this.props.store}/>} />
+          <Route path="/z" render={
+          ()=> <MyList store ={this.props.store}/>} />
 
 
         </Content>
