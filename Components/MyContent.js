@@ -28,10 +28,9 @@ export default observer (class MyContent extends Component {
         </Content>
         <Footer>
          <FooterTab>
-           <Button badge vertical>
+           <Button vertical>
              <Link to="/x">
              <View>
-             <Badge><Text>2</Text></Badge>
              <Icon name="apps" />
              <Text>Login</Text>
              </View>

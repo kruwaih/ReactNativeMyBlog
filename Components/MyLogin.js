@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Header, Content, Card, CardItem, Text, Icon, Right, Form, Item, Input, Label, Button } from 'native-base';
 import { observer } from "mobx-react";
 import auth from './auth';
+import MyHeader from './MyHeader';
 
 
 export default observer(class MyLogin extends Component{
@@ -23,7 +24,8 @@ export default observer(class MyLogin extends Component{
 
 
     return (
-
+      <Container>
+      <MyHeader headerText={'Login'}/>
       <Form>
         <Item floatingLabel>
           <Label>Username</Label>
@@ -35,6 +37,7 @@ export default observer(class MyLogin extends Component{
         </Item>
         <Button full onPress={this.ButtonPress.bind(this)}><Text> Login </Text></Button>
       </Form>
+      </Container>
 
 
     );

@@ -3,6 +3,7 @@ import { Container, Header, Content, Item, Input, Button, Text } from 'native-ba
 import {View} from 'react-native';
 import { Checkbox, checkboxStyle } from 'nachos-ui';
 import { observer } from "mobx-react";
+import MyHeader from './MyHeader';
 
 export default observer (class MyPost extends Component {
   constructor(props){
@@ -59,7 +60,7 @@ export default observer (class MyPost extends Component {
      const checkboxStyle = { margin: 15 }
     return (
       <Container>
-        <Header />
+        <MyHeader headerText={'Create Post'}/>
         <Content>
           <Item floatingLabel>
           <Input  type='text' placeholder="Title" onChangeText={ (x) => this.setState({title:x})}/>

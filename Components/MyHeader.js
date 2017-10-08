@@ -1,33 +1,31 @@
-import { Container, Header, Content, Footer, FooterTab, Button, Text, Left, Right, Icon, Body, Title, Form, Item, Label, Input } from 'native-base';
 import React, { Component } from 'react';
-import { observer } from "mobx-react";
+import { Text, View } from 'react-native';
 
-export default observer (class MyHeader extends Component {
-  componentDidMount(){
-    console.log('hi')
+const MyHeader = (props) => {
+  const { textStyle, viewStyle } = styles;
+
+  return (
+    <View style={viewStyle}>
+      <Text style={textStyle}>{props.headerText}</Text>
+    </View>
+  )
+};
+
+  const styles = {
+    viewStyle:{
+      backgroundColor: '#F8F8F8',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 60,
+      paddingTop: 15,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.3,
+      elevation: 2,
+      position: 'fixed'
+    },
+    textStyle:{
+      fontSize: 20
+    },
   }
-  render() {
-    return (
-
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name='arrow-back' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Header</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icon name='menu' />
-            </Button>
-          </Right>
-
-        </Header>
-
-
-    );
-  }
-}
-);
+  export default MyHeader;

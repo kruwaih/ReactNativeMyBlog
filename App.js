@@ -6,11 +6,14 @@ import MyContent from './Components/MyContent';
 import MyPost from './Components/MyPost';
 import MyList from './Components/MyList';
 import MyLogin from './Components/MyLogin';
+import MyHeader from './Components/MyHeader';
 import MyStore from './Store';
 
 export default observer (class App extends Component {
 
   render() {
+    <MyHeader headerText={'Header'} />
+
     if(MyStore.authenticated){
     return (
       <Container>
