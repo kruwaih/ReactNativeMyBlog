@@ -3,6 +3,7 @@ import { Container, Header, Content, List, ListItem, Text, Button } from 'native
 import { observer } from "mobx-react";
 import {ListView} from 'react-native';
 import MyHeader from './MyHeader';
+import MyDetail from './MyDetail';
 
 
   export default observer (class MyList extends Component {
@@ -32,7 +33,10 @@ import MyHeader from './MyHeader';
     fetch(this.state.url)
     .then((x) => x.json())
     .then((y) => {
-      this.setState({nextUrl: y.next, previousUrl: y.previous, dataSource: this.state.dataSource.cloneWithRows(y.results)})
+      this.setState({nextUrl: y.next,
+                    previousUrl: y.previous,
+                    dataSource: this.state.dataSource.cloneWithRows(y.results)
+                  })
       this.props.store.dataSource = y.results;
       this.props.store.loaded = true;
     })
@@ -47,6 +51,8 @@ import MyHeader from './MyHeader';
     </ListItem>
   )
   }
+
+
   renderDetail(detailurl){
       this.setState({detailUrl: detailurl, editmode: true});
 
@@ -76,8 +82,12 @@ import MyHeader from './MyHeader';
     );
   }
   else {
-    <EditComponent url={this.state.detailUrl} />
-  }
+    return(
+    <Container>
+    <MyDetail url={this.state.detailUrl} />
+  </Container>
+);
+}
 }
 
 }

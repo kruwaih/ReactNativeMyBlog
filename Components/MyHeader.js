@@ -22,7 +22,7 @@ const MyHeader = (props) => {
       shadowOffset: {width: 0, height: 2},
       shadowOpacity: 0.3,
       elevation: 2,
-      position: 'fixed'
+      position: 'relative'
     },
     textStyle:{
       fontSize: 20

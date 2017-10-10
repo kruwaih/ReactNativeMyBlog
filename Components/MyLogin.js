@@ -10,7 +10,7 @@ export default observer(class MyLogin extends Component{
     super(props);
     this.state={
       username:"",
-      password:""
+      password:"",
     }
   };
   ButtonPress(e){

@@ -12,7 +12,8 @@ export default observer (class MyPost extends Component {
       secondChecked: true,
       title: "",
       detail: "",
-      publish: ""
+      publish: "",
+      
 
     };
 
