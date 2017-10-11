@@ -7,6 +7,9 @@ class MyStore {
         token:"",
         loaded:false,
         authenticated:false,
+        nextUrl:"",
+        previousUrl:"",
+        detailUrl:"",
       }
     )
   }

@@ -6,6 +6,7 @@ import {View} from 'react-native';
 import MyList from './MyList';
 import MyLogin from './MyLogin';
 import MyPost from './MyPost';
+import MyDetail from './MyDetail';
 
 
 
@@ -22,7 +23,8 @@ export default observer (class MyContent extends Component {
           <Route path="/y" render={
           ()=> <MyPost store ={this.props.store}/>} />
           <Route path="/z" render={
-          ()=> <MyList store ={this.props.store}/>} />
+          ()=> <MyList x={false} store ={this.props.store}/>} />
+          <Route path="/Detail" component={MyDetail} />
 
 
         </Content>
@@ -57,14 +59,6 @@ export default observer (class MyContent extends Component {
            </Link>
            </Button>
 
-           <Button vertical>
-             <Link to="/a">
-             <View>
-             <Icon name="person" />
-             <Text>Contact</Text>
-             </View>
-           </Link>
-           </Button>
          </FooterTab>
        </Footer>
         </Container>

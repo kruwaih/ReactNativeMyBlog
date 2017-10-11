@@ -16,6 +16,8 @@ import MyStore from '../Store';
       content: "",
       publish: "",
       slug: "",
+      comment:"",
+      object_pk:"",
       author: "",
       datacomment: new ListView.DataSource({
         rowHasChanged:(row1, row2) => row1 !== row2,
@@ -28,7 +30,7 @@ import MyStore from '../Store';
 
 
   fetchData(){
-    fetch(this.props.url)
+    fetch(MyStore.detailUrl)
     .then((x) => x.json())
     .then((y) => {
       this.setState({title: y.title,
@@ -37,6 +39,7 @@ import MyStore from '../Store';
                     slug:y.slug,
                     author:y.author,
                     datacomment: this.state.datacomment.cloneWithRows(y.comments),
+                    object_pk:y.id,
 
       }, console.log(y.comments));
     })
@@ -45,7 +48,6 @@ import MyStore from '../Store';
   }
 
   handlePostEdit(){
-
     fetch('http://139.59.119.40/api/update/'+ this.state.slug+"/" ,{
     method: 'PUT',
     headers: {
@@ -60,11 +62,28 @@ import MyStore from '../Store';
       "content": this.state.content,
       "publish": this.state.publish
     })})
-    .then((x) => x.json())
     .then((res) => {console.log(res);})
     .catch((error) => {console.log(error)}).done();
+}
 
+  createComment(){
+    console.log(this.state.comment)
+    fetch('http://139.59.119.40/api/comment/create/' ,{
+    method: 'POST',
+    headers: {
+      'Accept':'application/json',
+      'Content-Type':'application/json',
+      'Authorization': 'JWT ' + MyStore.token,
+  },
+    body: JSON.stringify({
+      "comment": this.state.comment,
+      "object_pk": this.state.object_pk
+    })})
+    .then((res) => {console.log(res);})
+    .catch((error) => {console.log(error)}).done();
   }
+
+
   deleteItem(){
     fetch('http://139.59.119.40/api/delete/'+ this.state.slug+"/" ,{
     method: 'DELETE',
@@ -83,7 +102,7 @@ import MyStore from '../Store';
 
   }
   renderComment(object){
-    console.log(object)
+    if (object.comment) {
     return(
     <ListItem>
       <Text>{object.comment}</Text>
@@ -91,7 +110,7 @@ import MyStore from '../Store';
 
     </ListItem>
   )
-  }
+}}
 
   render() {
     if(MyStore.username===this.state.author.username){
@@ -111,9 +130,14 @@ import MyStore from '../Store';
         <Button primary onPress={this.handlePostEdit.bind(this)}><Text> Edit </Text></Button>
         <List>
         <ListView
+          enableEmptySections={true}
           dataSource={this.state.datacomment}
           renderRow={this.renderComment.bind(this)} />
         </List>
+        <Item>
+          <Input type='text' value={this.state.comment} onChangeText={ (x) => this.setState({comment:x})}/>
+        </Item>
+        <Button primary onPress={this.createComment.bind(this)}><Text> Create </Text></Button>
         {/* <List>
         <ListView
           datacomment={this.state.datacomment}
@@ -139,9 +163,14 @@ import MyStore from '../Store';
         </Item>
         <List>
         <ListView
+          enableEmptySections={true}
           dataSource={this.state.datacomment}
           renderRow={this.renderComment.bind(this)} />
         </List>
+        <Item>
+          <Input type='text' value={this.state.comment} onChangeText={ (x) => this.setState({comment:x})}/>
+        </Item>
+        <Button primary onPress={this.createComment.bind(this)}><Text> Create </Text></Button>
 
 
       </Container>
