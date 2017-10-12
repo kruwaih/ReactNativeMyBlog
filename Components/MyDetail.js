@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Text, Item, Button, Input } from 'native-base';
+import { Container, Header, Content, List, ListItem, Text, Item, Button, Input,Icon } from 'native-base';
 import { observer } from "mobx-react";
 import {ListView} from 'react-native';
 import MyHeader from './MyHeader';
@@ -117,6 +117,7 @@ import MyStore from '../Store';
     return (
       <Container>
         <MyHeader headerText={'Detail'}/>
+
         <Item floatingLabel>
         <Input  type='text' value={this.state.title} onChangeText={ (x) => this.setState({title:x})}/>
         </Item>
@@ -126,18 +127,21 @@ import MyStore from '../Store';
         <Item floatingLabel last>
           <Input  type='date' value={this.state.publish} onChangeText={ (x) => this.setState({publish:x})}/>
         </Item>
-        <Button primary onPress={this.deleteItem.bind(this)}><Text> Delete </Text></Button>
-        <Button primary onPress={this.handlePostEdit.bind(this)}><Text> Edit </Text></Button>
-        <List>
+
+
+      <List>
         <ListView
           enableEmptySections={true}
           dataSource={this.state.datacomment}
           renderRow={this.renderComment.bind(this)} />
         </List>
-        <Item>
-          <Input type='text' value={this.state.comment} onChangeText={ (x) => this.setState({comment:x})}/>
+        <Button style={{position:'relative', alignItems:'center',top:45, left:310}} bordered danger onPress={this.deleteItem.bind(this)} ><Icon name='trash'/></Button>
+        <Button style={{position:'relative', alignItems:'center', left:8}} bordered success onPress={this.handlePostEdit.bind(this)}><Text>Edit</Text></Button>
+
+        <Item regular>
+          <Input style={{ height:180}} type='text' placeholder='Add a Comment' value={this.state.comment} onChangeText={ (x) => this.setState({comment:x})}/>
         </Item>
-        <Button primary onPress={this.createComment.bind(this)}><Text> Create </Text></Button>
+        <Button style={{position:'relative', justifyContent:'space-around', width:350, alignItems:'center', left:8}} rounded primary onPress={this.createComment.bind(this)}><Text> Create </Text></Button>
         {/* <List>
         <ListView
           datacomment={this.state.datacomment}
@@ -145,13 +149,12 @@ import MyStore from '../Store';
         </List> */}
 
         {/* <Input autoCapitalize='none' type='text' onChangeText={ (x) => this.setState({username:x})}/> */}
-
       </Container>
     );}
     else{
       return(
       <Container>
-        <MyHeader headerText={'Detail'}/>
+        {/* <MyHeader headerText={'Detail'}/> */}
         <Item floatingLabel>
         <Input  type='text' value={this.state.title}/>
         </Item>

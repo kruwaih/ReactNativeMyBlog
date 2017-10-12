@@ -16,7 +16,7 @@ export default observer (class MyContent extends Component {
   render() {
     return (
       <NativeRouter>
-      <Container>
+      <Container style= {{ backgroundColor: '#fff5ee' }}>
         <Content>
 
           <Route path="/x" component={MyLogin} />
@@ -33,7 +33,7 @@ export default observer (class MyContent extends Component {
            <Button vertical>
              <Link to="/x">
              <View>
-             <Icon name="apps" />
+             <Icon style={{left:8}} name="contact" />
              <Text>Login</Text>
              </View>
            </Link>
@@ -43,17 +43,16 @@ export default observer (class MyContent extends Component {
            <Button vertical>
              <Link to="/y">
              <View>
-             <Icon name="camera" />
+             <Icon style={{left:15}} name="create" />
              <Text>Create</Text>
              </View>
            </Link>
            </Button>
 
-           <Button active badge vertical>
+           <Button vertical>
              <Link to="/z">
              <View>
-             <Badge ><Text>51</Text></Badge>
-             <Icon active name="navigate" />
+             <Icon style={{left:5}} name="list" />
              <Text>List</Text>
              </View>
            </Link>
@@ -65,7 +64,11 @@ export default observer (class MyContent extends Component {
         </NativeRouter>
 
 
+
     );
   }
 }
 )
+// const styles = StyleSheet.create({
+// backgroundColor:"#cd853f"
+// });

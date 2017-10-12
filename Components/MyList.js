@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Text, Button } from 'native-base';
+import { Container, Header, Content, List, ListItem, Text, Button, Icon } from 'native-base';
 import { observer } from "mobx-react";
 import {ListView, View,TouchableOpacity} from 'react-native';
 import MyHeader from './MyHeader';
@@ -59,7 +59,7 @@ import MyStore from '../Store';
       <Text>{object.title} </Text>
       <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
 
-      <TouchableOpacity primary>
+      <TouchableOpacity >
       <Link to="/Detail" onPress={this.renderDetail.bind(this,object.detail)}>
       <View>
        <Text>Detail</Text>
@@ -93,8 +93,19 @@ import MyStore from '../Store';
             <ListView
               dataSource={this.state.dataSource}
               renderRow={this.renderItem.bind(this)} />
-              <Button primary onPress={this.nextPage.bind(this)}><Text> Next </Text></Button>
-               <Button primary onPress={this.previousPage.bind(this)}><Text> Previous </Text></Button>
+                <View>
+                  <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+              <Button style={{position: 'relative', top:100, width:120}} iconLeft light onPress={this.previousPage.bind(this)}><Icon name='arrow-back' /><Text>Previous</Text>
+            </Button>
+            </View>
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
+              <Button style={{position:'relative', top:100, width:120}} iconRight light onPress={this.nextPage.bind(this)}><Text>Next</Text>
+              <Icon name='arrow-forward' />
+            </Button>
+              </View>
+              </View>
+
+
 
           </List>
       </Container>

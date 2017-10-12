@@ -3,6 +3,7 @@ import { Container, Header, Content, Card, CardItem, Text, Icon, Right, Form, It
 import { observer } from "mobx-react";
 import auth from './auth';
 import MyHeader from './MyHeader';
+import MyContent from './MyContent';
 
 
 export default observer(class MyLogin extends Component{
@@ -18,6 +19,7 @@ export default observer(class MyLogin extends Component{
   }
   componentWillMount(){
     auth.firstLoad();
+
   }
 
   render() {
@@ -35,7 +37,9 @@ export default observer(class MyLogin extends Component{
           <Label>Password</Label>
           <Input secureTextEntry={true} type='password' onChangeText={ (x) => this.setState({password:x})}/>
         </Item>
-        <Button full onPress={this.ButtonPress.bind(this)}><Text> Login </Text></Button>
+        <Text>
+        </Text>
+        <Button style={{position:'relative', justifyContent:'space-around', width:350, alignItems:'center', left:8}} rounded onPress={this.ButtonPress.bind(this)}><Text> Login </Text></Button>
       </Form>
       </Container>
 
